@@ -1,52 +1,84 @@
-# 📊 Portal de Gestão de TI - InnerWorks
+﻿# 🌐 Portal Inner
 
-Sistema web administrativo desenvolvido para centralizar e facilitar o gerenciamento de informações de infraestrutura de TI, contratos e documentação técnica.
+O **Portal Inner** é uma plataforma centralizada de monitoramento e gestão, projetada para oferecer aos gestores de contrato uma visão clara, técnica e em tempo real de toda a sua infraestrutura. 
 
-Este projeto foi desenvolvido utilizando **React + Vite** com estilização em **Tailwind CSS**, proporcionando uma interface moderna, rápida e responsiva.
-
----
-
-# 🚀 Tecnologias Utilizadas
-
-- **React.js** – Biblioteca para construção da interface
-- **Vite** – Ferramenta de build e desenvolvimento rápido
-- **Tailwind CSS** – Framework de estilização utilitária
-- **React Router DOM** – Gerenciamento de rotas da aplicação
-- **Lucide React** – Biblioteca de ícones
-- **JavaScript (ES6+)**
+O projeto visa dar autonomia ao cliente e reduzir a carga de solicitações manuais ao time técnico, centralizando dados do **Microsoft 365, Servidores Físicos, Redes e Chamados GLPI**.
 
 ---
 
-# 📌 Funcionalidades do Sistema
+## 🎯 Objetivos do Projeto
 
-O portal foi desenvolvido com diferentes módulos administrativos para facilitar a gestão do ambiente de TI.
+* **Centralização:** Um único ponto de acesso para informações de diferentes fontes.
+* **Autonomia:** Gestores visualizam métricas sem depender de relatórios manuais.
+* **Transparência:** Dados reais sobre saúde do ambiente e consumo de licenças.
+* **Real-time:** Atualização instantânea de métricas críticas via WebSockets.
 
-### 🔐 Sistema de Autenticação
-- Tela de login
-- Redirecionamento para área administrativa
-- Separação entre acesso de administrador e clientes
+---
 
-### 📊 Dashboard
-- Visualização geral do sistema
-- Indicadores de empresas cadastradas
-- Agentes ativos
-- Usuários do sistema
-- Documentos cadastrados
+## 🛠️ Stack Tecnológica
 
-### 👥 Gestão de Usuários
-- Cadastro de usuários
-- Controle de permissões
-- Perfis de acesso (Administrador, Gestor e Técnico)
-- Controle de status e último acesso
+| Camada | Tecnologia |
+| :--- | :--- |
+| **Frontend** | [Vite](https://vitejs.dev/) + [React](https://reactjs.org/) |
+| **Backend** | [Fastify](https://www.fastify.io/) (Node.js) |
+| **Banco de Dados** | [Supabase DB](https://supabase.com/) (PostgreSQL) |
+| **Real-time** | [Supabase Realtime](https://supabase.com/docs/guides/realtime) |
+| **Monitoramento** | [Zabbix](https://www.zabbix.com/)|
+| **Integrações** | Microsoft Graph API & GLPI API |
 
-### 📁 Documentação Técnica
-- Upload de arquivos
-- Gerenciamento de documentos
-- Filtros por empresa e categoria
-- Visualização e download de arquivos
+---
 
-### ⚙️ Configurações do Sistema
-- Configuração de parâmetros gerais
-- Segurança e políticas de senha
-- Configurações de sessão
-- Logs e modo de manutenção
+## 📋 Funcionalidades Principais
+
+### 📊 Dashboards e Módulos
+* **Dashboard Geral:** Cards de status (MS365, Servidores, Saúde Geral) e alertas rápidos.
+* **Microsoft 365:** Monitoramento de licenças (uso vs. disponível), usuários ativos e armazenamento do SharePoint via **Microsoft Graph API**.
+* **Servidores Físicos:** Visualização em tempo real de **CPU, Memória e Rede** através de um agente Python dedicado.
+* **Gestão de Chamados (GLPI):** Indicadores de SLA, volume de chamados, média de tempo de resolução e top requerentes.
+* **Rede:** Status de conectividade e latência.
+* **Documentação Técnica:** Visualizador centralizado com filtros por categoria, cliente e busca por palavra-chave.
+
+### 👤 Perfis de Acesso
+1.  **Gestor de Contrato:** Visualização total dos dados técnicos do seu contrato (Leitura).
+2.  **Administrador Inner:** Gerenciamento de acessos, cadastro de clientes e contratos.
+
+---
+
+## 🏗️ Arquitetura da Solução
+
+O sistema foi desenhado para ser escalável e performático:
+
+1.  **Coleta de Dados:** Via Zabbix.
+2.  **Processamento:** O **Fastify** consome APIs REST de terceiros (Zabbix, Graph API, GLPI).
+3.  **Sincronização:** Os dados são persistidos no **Supabase**.
+4.  **Interface:** O Frontend escuta as mudanças via **Supabase Realtime**, atualizando os gráficos sem necessidade de recarregar a página.
+
+---
+
+## 🔒 Segurança
+
+* **Isolamento de Dados:** Filtros rigorosos por ID de contrato/cliente no banco de dados.
+* **Autenticação:** Sistema de login com JWT e controle de permissões por nível.
+* **Criptografia:** Toda a comunicação entre agentes, backend e frontend é criptografada.
+* **Tokens:** Uso de tokens específicos para autenticação dos agentes de monitoramento.
+
+---
+
+## 🚀 Como Executar o Projeto (Desenvolvimento)
+
+### Pré-requisitos
+* Node.js (v18+)
+* Zabbix
+* Supabase Local
+* API Microsoft Graph
+* API GLPI
+
+
+
+## 🔮 Considerações Futuras
+* Expansão para novos módulos de infraestrutura.
+* Relatórios automatizados em PDF para gestores.
+* Aplicativo mobile para alertas push.
+
+---
+© 2026 Portal Inner - Todos os direitos reservados.
